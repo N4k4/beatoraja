@@ -169,13 +169,13 @@ public class ControlInputProcessor {
 		}
 		// play speed change (autoplay or replay only)
 		if (autoplay.mode == BMSPlayerMode.Mode.AUTOPLAY || autoplay.mode == BMSPlayerMode.Mode.REPLAY) {
-			if (input.getNumberState()[1]) {
+			if (input.getNumberState()[1] || input.getNumpadState()[1]) {
 				player.setPlaySpeed(25);
-			} else if (input.getNumberState()[2]) {
+			} else if (input.getNumberState()[2] || input.getNumpadState()[2]) {
 				player.setPlaySpeed(50);
-			} else if (input.getNumberState()[3]) {
+			} else if (input.getNumberState()[3] || input.getNumpadState()[3]) {
 				player.setPlaySpeed(200);
-			} else if (input.getNumberState()[4]) {
+			} else if (input.getNumberState()[4] || input.getNumpadState()[4]) {
 				player.setPlaySpeed(300);
 			} else {
 				player.setPlaySpeed(100);

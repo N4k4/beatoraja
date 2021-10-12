@@ -149,6 +149,7 @@ public class KeyConfiguration extends MainState {
 		boolean[] cursor = input.getCursorState();
 		long[] cursortime = input.getCursorTime();
 		boolean[] number = input.getNumberState();
+		boolean[] numpad = input.getNumpadState();
 		if (cursor[2] && cursortime[2] != 0) {
 			cursortime[2] = 0;
 			setMode((mode + KEYS.length - 1) % KEYS.length);
@@ -195,13 +196,15 @@ public class KeyConfiguration extends MainState {
 				cursorpos = (cursorpos + 1) % keys.length;
 			}
 
-			if (number[1] && input.getNumberTime()[1] != 0) {
+			if ((number[1] && input.getNumberTime()[1] != 0) || (numpad[1] && input.getNumpadTime()[1] != 0)) {
 				input.getNumberTime()[1] = 0;
+				input.getNumpadTime()[1] = 0;
 				config.setMusicselectinput((config.getMusicselectinput() + 1) % 3);
 			}
 			// change contronnler device 1
-			if (number[2] && input.getNumberTime()[2] != 0) {
+			if ((number[2] && input.getNumberTime()[2] != 0) || (numpad[2] && input.getNumpadTime()[2] != 0)) {
 				input.getNumberTime()[2] = 0;
+				input.getNumpadTime()[2] = 0;
 				if (controllers.length > 0) {
 					int index = 0;
 					for (; index < controllers.length; index++) {
@@ -230,24 +233,27 @@ public class KeyConfiguration extends MainState {
 				}
 			}
 
-			if (number[7] && input.getNumberTime()[7] != 0) {
+			if ((number[7] && input.getNumberTime()[7] != 0) || (numpad[7] && input.getNumpadTime()[7] != 0)) {
 				input.getNumberTime()[7] = 0;
+				input.getNumpadTime()[7] = 0;
 				keyboardConfig.setKeyAssign(MODE_HINT[mode], true);
 				for (int i = 0; i < controllerConfigs.length; i++) {
 					controllerConfigs[i].setKeyAssign(MODE_HINT[mode], i, false);
 				}
 				midiconfig.setKeyAssign(MODE_HINT[mode], false);
 			}
-			if (number[8] && input.getNumberTime()[8] != 0) {
+			if ((number[8] && input.getNumberTime()[8] != 0) || (numpad[8] && input.getNumpadTime()[8] != 0)) {
 				input.getNumberTime()[8] = 0;
+				input.getNumpadTime()[8] = 0;
 				keyboardConfig.setKeyAssign(MODE_HINT[mode], false);
 				for (int i = 0; i < controllerConfigs.length; i++) {
 					controllerConfigs[i].setKeyAssign(MODE_HINT[mode], i, true);
 				}
 				midiconfig.setKeyAssign(MODE_HINT[mode], false);
 			}
-			if (number[9] && input.getNumberTime()[9] != 0) {
+			if ((number[9] && input.getNumberTime()[9] != 0) || (numpad[9] && input.getNumpadTime()[9] != 0)) {
 				input.getNumberTime()[9] = 0;
+				input.getNumpadTime()[9] = 0;
 				keyboardConfig.setKeyAssign(MODE_HINT[mode], false);
 				for (int i = 0; i < controllerConfigs.length; i++) {
 					controllerConfigs[i].setKeyAssign(MODE_HINT[mode], i, false);

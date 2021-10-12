@@ -73,6 +73,8 @@ public class MusicSelectInputProcessor {
 
         boolean[] numberstate = input.getNumberState();
         long[] numtime = input.getNumberTime();
+        boolean[] numpadstate = input.getNumpadState();
+        long[] numpadtime = input.getNumpadTime();
         if (numberstate[0] && numtime[0] != 0) {
             // 検索用ポップアップ表示。これ必要？
             numtime[0] = 0;
@@ -91,19 +93,22 @@ public class MusicSelectInputProcessor {
             }, "Search", "", "Search bms title");
         }
 
-        if (numberstate[1] && numtime[1] != 0) {
+        if ((numberstate[1] && numtime[1] != 0) || (numpadstate[1] && numpadtime[1] != 0)) {
             // KEYフィルターの切り替え
             numtime[1] = 0;
+            numpadtime[1] = 0;
             select.executeEvent(EventType.mode);
         }
-        if (numberstate[2] && numtime[2] != 0) {
+        if ((numberstate[2] && numtime[2] != 0) || (numpadstate[2] && numpadtime[2] != 0)) {
             // ソートの切り替え
             numtime[2] = 0;
+            numpadtime[2] = 0;
             select.executeEvent(EventType.sort);
         }
-        if (numberstate[3] && numtime[3] != 0) {
+        if ((numberstate[3] && numtime[3] != 0) || (numpadstate[3] && numpadtime[3] != 0)) {
             // LNモードの切り替え
             numtime[3] = 0;
+            numpadtime[3] = 0;
             select.executeEvent(EventType.lnmode);
         }
 
@@ -114,7 +119,7 @@ public class MusicSelectInputProcessor {
 
         final MusicSelectKeyProperty property = MusicSelectKeyProperty.values()[config.getMusicselectinput()];
 
-        if(!input.startPressed() && !input.isSelectPressed() && !input.getNumberState()[5]){
+        if(!input.startPressed() && !input.isSelectPressed() && !input.getNumberState()[5] && !input.getNumpadState()[5]){
             //オプションキー入力なし
             isOptionKeyReleased = true;
             if(isOptionKeyPressed) {
@@ -123,10 +128,11 @@ public class MusicSelectInputProcessor {
             }
         }
 
-        if (numberstate[4] && numtime[4] != 0
-                || (!input.startPressed() && !input.isSelectPressed() && !input.getNumberState()[5] && property.isPressed(keystate, keytime, NEXT_REPLAY, true))) {
+        if ((numberstate[4] && numtime[4] != 0) || (numpadstate[4] && numpadtime[4] != 0)
+                || (!input.startPressed() && !input.isSelectPressed() && !input.getNumberState()[5] && !input.getNumpadState()[5] && property.isPressed(keystate, keytime, NEXT_REPLAY, true))) {
             // change replay
             numtime[4] = 0;
+            numpadtime[4] = 0;
             select.execute(MusicSelectCommand.NEXT_REPLAY);
         }
         if (input.startPressed() && !input.isSelectPressed()) {
@@ -257,7 +263,7 @@ public class MusicSelectInputProcessor {
                 config.setMineMode(config.getMineMode() == 1 ? 0 : 1);
                 select.play(SOUND_OPTIONCHANGE);
             }
-        } else if (input.getNumberState()[5] || (input.startPressed() && input.isSelectPressed())) {
+        } else if (input.getNumberState()[5] || input.getNumpadState()[5] || (input.startPressed() && input.isSelectPressed())) {
             bar.resetInput();
             // show detail option
             select.setPanelState(3);
@@ -333,16 +339,19 @@ public class MusicSelectInputProcessor {
                 }
             }
 
-            if (numberstate[7] && numtime[7] != 0) {
+            if ((numberstate[7] && numtime[7] != 0) || (numpadstate[7] && numpadtime[7] != 0)) {
                 numtime[7] = 0;
+                numpadtime[7] = 0;
                 select.executeEvent(EventType.rival);
             }
-            if (numberstate[8] && numtime[8] != 0) {
+            if ((numberstate[8] && numtime[8] != 0) || (numpadstate[8] && numpadtime[8] != 0)) {
                 numtime[8] = 0;
+                numpadtime[8] = 0;
                 select.execute(MusicSelectCommand.SHOW_SONGS_ON_SAME_FOLDER);
             }
-            if (numberstate[9] && numtime[9] != 0) {
+            if ((numberstate[9] && numtime[9] != 0) || (numpadstate[9] && numpadtime[9] != 0)) {
                 numtime[9] = 0;
+                numpadtime[9] = 0;
                 select.executeEvent(EventType.open_document);
             }
             // close folder

@@ -312,11 +312,11 @@ public class BMSPlayerInputProcessor {
 		return numtime;
 	}
 
-	public boolean[] getNumpadstate() {
+	public boolean[] getNumpadState() {
 		return numpadstate;
 	}
 
-	public long[] getNumpadtime() {
+	public long[] getNumpadTime() {
 		return numpadtime;
 	}
 

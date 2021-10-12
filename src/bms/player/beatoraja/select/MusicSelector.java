@@ -546,7 +546,7 @@ public class MusicSelector extends MainState {
 	public void input() {
 		final BMSPlayerInputProcessor input = main.getInputProcessor();
 
-		if (input.getNumberState()[6]) {
+		if (input.getNumberState()[6] || input.getNumpadState()[6]) {
 			changeState(MainStateType.CONFIG);
 		} else if (input.isActivated(KeyCommand.OPEN_SKIN_CONFIGURATION)) {
 			changeState(MainStateType.SKINCONFIG);

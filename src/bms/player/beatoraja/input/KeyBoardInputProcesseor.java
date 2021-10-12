@@ -26,6 +26,13 @@ public class KeyBoardInputProcesseor extends BMSPlayerInputDevice implements Inp
 	private final int[] numbers = { Keys.NUM_0, Keys.NUM_1, Keys.NUM_2, Keys.NUM_3, Keys.NUM_4, Keys.NUM_5,
 			Keys.NUM_6, Keys.NUM_7, Keys.NUM_8, Keys.NUM_9 };
 	/**
+	 * テンキー
+	 */
+	private final int[] numpads = {
+			Keys.NUMPAD_0, Keys.NUMPAD_1, Keys.NUMPAD_2, Keys.NUMPAD_3, Keys.NUMPAD_4, Keys.NUMPAD_5,
+			Keys.NUMPAD_6, Keys.NUMPAD_7, Keys.NUMPAD_8, Keys.NUMPAD_9
+	};
+	/**
 	 * カーソル
 	 */
 	private final int[] cover = { Keys.UP, Keys.DOWN, Keys.LEFT, Keys.RIGHT };
@@ -141,6 +148,15 @@ public class KeyBoardInputProcesseor extends BMSPlayerInputDevice implements Inp
 					keystate[numbers[i]] = pressed;
 					this.bmsPlayerInputProcessor.numberstate[i] = pressed;
 					this.bmsPlayerInputProcessor.numtime[i] = presstime;
+				}
+			}
+
+			for (int i = 0; i < numpads.length; i++) {
+				final boolean pressed = Gdx.input.isKeyPressed(numpads[i]);
+				if (pressed != keystate[numpads[i]]) {
+					keystate[numpads[i]] = pressed;
+					this.bmsPlayerInputProcessor.numpadstate[i] = pressed;
+					this.bmsPlayerInputProcessor.numpadtime[i] = presstime;
 				}
 			}
 

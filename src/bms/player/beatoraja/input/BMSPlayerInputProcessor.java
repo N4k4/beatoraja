@@ -115,6 +115,14 @@ public class BMSPlayerInputProcessor {
 	 */
 	long[] numtime = new long[10];
 	/**
+	 * テンキーのON/OFF状態
+	 */
+	boolean[] numpadstate = new boolean[10];
+	/**
+	 * テンキーの最終更新時間
+	 */
+	long[] numpadtime = new long[10];
+	/**
 	 * F1-F12キーのON/OFF状態
 	 */
 	boolean[] functionstate = new boolean[12];
@@ -302,6 +310,14 @@ public class BMSPlayerInputProcessor {
 
 	public long[] getNumberTime() {
 		return numtime;
+	}
+
+	public boolean[] getNumpadstate() {
+		return numpadstate;
+	}
+
+	public long[] getNumpadtime() {
+		return numpadtime;
 	}
 
 	public void keyChanged(BMSPlayerInputDevice device, long presstime, int i, boolean pressed) {
